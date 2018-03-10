@@ -1,1 +1,7 @@
 /bin/
+/.gitignore
+/Interface.class
+/Missile.class
+/Player.class
+/TextRPG.class
+/game/

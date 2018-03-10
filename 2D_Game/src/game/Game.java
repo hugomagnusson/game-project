@@ -95,12 +95,12 @@ public class Game implements Runnable {
 			timer += now - lastTime;
 			lastTime = now;
 			
-			if(delta >= 1) {
+			//if(delta >= 1) {
 				tick();
 				render();
 				ticks++;
 				delta--;
-			}
+			//}
 			
 			if (timer >= 1000000000) {
 				System.out.println("Ticks and frames: " + ticks);
