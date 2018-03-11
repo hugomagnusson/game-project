@@ -1,0 +1,5 @@
+TODO LIST
+* Change the timer and remove the FPS lock in order to make input work on slower machines (Macbook Air)
+* Mouse input for character orientation
+* Collision detection
+* More entities

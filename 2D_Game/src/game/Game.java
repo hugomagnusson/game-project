@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import game.gfx.Assets;
+import game.gfx.GameCamera;
 import game.input.KeyManager;
 import game.states.GameState;
 import game.states.MenuState;
@@ -13,7 +14,7 @@ import game.states.State;
 public class Game implements Runnable {
 
 	private Display display;
-	public int width, height;
+	private int width, height;
 	public String title;
 	
 	private boolean running = false;
@@ -30,6 +31,8 @@ public class Game implements Runnable {
 	//input
 	private KeyManager keyManager;
 
+	//Camera
+	private GameCamera gameCamera;
 
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -42,6 +45,8 @@ public class Game implements Runnable {
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
+		
+		gameCamera = new GameCamera(this, 0, 0);
 		
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
@@ -95,12 +100,12 @@ public class Game implements Runnable {
 			timer += now - lastTime;
 			lastTime = now;
 			
-			//if(delta >= 1) {
+			if(delta >= 1) {
 				tick();
 				render();
 				ticks++;
 				delta--;
-			//}
+			}
 			
 			if (timer >= 1000000000) {
 				System.out.println("Ticks and frames: " + ticks);
@@ -114,6 +119,18 @@ public class Game implements Runnable {
 	
 	public KeyManager getKeyManager() {
 		return keyManager;
+	}
+	
+	public GameCamera getGameCamera() {
+		return gameCamera;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 
 	public synchronized void start() {
